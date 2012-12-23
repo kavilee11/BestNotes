@@ -3,8 +3,8 @@
 
     <string name="app_name">BestNotes</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_search">查找</string>
-    <string name="menu_share">分享</string>
-    <string name="menu_more">更多</string>
+    <string name="menu_search">search</string>
+    <string name="menu_share">share</string>
+    <string name="menu_more">more</string>
 
 </resources>
