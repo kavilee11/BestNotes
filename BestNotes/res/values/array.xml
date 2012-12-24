@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_action_spinner">
+        <item>Time</item>
+        <item>Location</item>
+    </string-array>
+</resources>
