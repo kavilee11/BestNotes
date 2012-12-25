@@ -56,8 +56,14 @@ public class SelectionListView extends ListView {
 	}
 
 	boolean mSelectionMode = false;
-	int mStartPosition;
+	public boolean ismSelectionMode() {
+		return mSelectionMode;
+	}
+	public void setmSelectionMode(boolean mSelectionMode) {
+		this.mSelectionMode = mSelectionMode;
+	}
 
+	int startX,startY;
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 
@@ -67,7 +73,8 @@ public class SelectionListView extends ListView {
 
 		if (action == MotionEvent.ACTION_DOWN && x < getWidth() / 7) {
 			mSelectionMode = true;
-			mStartPosition = pointToPosition(x, y);
+			startX = x;
+			startY = y;
 		}
 		if (!mSelectionMode)
 			return super.onTouchEvent(ev);
@@ -75,15 +82,14 @@ public class SelectionListView extends ListView {
 		case MotionEvent.ACTION_DOWN:
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if (pointToPosition(x, y) != mStartPosition)
+			if(x != startX && y != startY)
 				mSelectionMode = false;
-			break;
+			return super.onTouchEvent(ev);
 		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
 		default:
 			mSelectionMode = false;
 			int mItemPosition = pointToPosition(x, y);
-			if (mStartPosition != ListView.INVALID_POSITION)
 				setItemChecked(mItemPosition, !isItemChecked(mItemPosition));
 		}
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.EditText;
 
 /**
@@ -19,6 +20,7 @@ import android.widget.EditText;
 public class BestNotesInnerPageFragment extends BestNotesBaseFragment{
 	private int noteID;
 	private BestNotesTextNoteDao dao = null;
+	private WebView webView;
 	
 	public static BestNotesInnerPageFragment getInstance(int noteId){
 		BestNotesInnerPageFragment fragment = new BestNotesInnerPageFragment();
@@ -39,16 +41,26 @@ public class BestNotesInnerPageFragment extends BestNotesBaseFragment{
 			Bundle savedInstanceState) {
 		dao = new BestNotesTextNoteDao(getActivity());
 		BestNotesTextNoteModel note = dao.getTextNoteById(noteID);
-		View view = inflater.inflate(R.layout.bestnotes_activity_add_note, null);
-		EditText et_title = (EditText) view.findViewById(R.id.et_title);
-		EditText et_content = (EditText) view.findViewById(R.id.et_content);
-		et_title.setText(note.getTitle());
-		et_content.setText(note.getContent());
-		et_title.setEnabled(false);
-		et_content.setEnabled(false);
+		String newContent = (note.getContent()).replace("\n", "<br>");// 把\n换成html中的换行符
+		note.setContent(newContent);
+		View view = inflater.inflate(R.layout.bestnotes_fragment_inner_page, null);
+		webView = (WebView) view.findViewById(R.id.webview);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.getSettings().setSupportZoom(true);
+		webView.getSettings().setBuiltInZoomControls(false);
+		webView.getSettings()
+				.setJavaScriptCanOpenWindowsAutomatically(true);
+		webView.getSettings().setPluginsEnabled(true);
+		webView.addJavascriptInterface(note, "note");
+		webView.loadUrl("file:///android_asset/view_note.html");
 		return view;
 	}
 
-	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		webView.destroy();
+	}
+
 	
 }

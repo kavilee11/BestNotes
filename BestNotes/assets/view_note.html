@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="application/vnd.wap.xhtml+xml;charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+	<style type="text/css">
+	body{
+		background:#FFFFFF;
+		line-height: 130%;
+	}
+	.div_title{
+		color:#000000;
+		font-weight:bold;
+		margin-top:18px;
+		margin-bottom:18px;
+	}
+	.div_content{
+		color:#000000;
+		font-weight:normal;
+	}
+	img{
+		width:100%;
+	}
+	</style>
+	
+        <script type="text/javascript">
+	    var note;
+	    var myTime;
+	    var myTitle;
+	    var myContent;
+	    
+	    function   formatDate(now)   {     
+		  var   year=now.getYear()+1900;     
+		  var   month=now.getMonth()+1;     
+		  var   date=now.getDate();     
+		  var   hour=now.getHours();     
+		  var   minute=now.getMinutes();     
+		  var   second=now.getSeconds();     
+		  return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;     
+	    }     
+
+	    function initView(){
+		myTime.innerHTML = formatDate(new Date(note.getModificationTime()));
+	    	myTitle.innerHTML = note.getTitle();
+		myContent.innerHTML = note.getContent();
+	    }
+		
+            function initialize(){
+		note = window.note;
+		myTime = document.getElementById("note_time");
+		myTitle = document.getElementById("note_title");
+		myContent = document.getElementById("note_content");
+		initView();
+            }
+          	
+            window.onload = function(){
+                initialize();
+            }
+        </script>
+    </head>
+    <body>
+	<div id="note_time" class="div_time"></div>
+	<div id="note_title" class="div_title"></div>
+	<div id="note_content" class="div_content"></div>
+	
+    </body>
+</html>
+
