@@ -8,8 +8,6 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 public class BestNotesBaseActivity extends SherlockFragmentActivity{
 
-	protected BestNotesDBHelper dbHelper = null;
-	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
@@ -34,25 +32,4 @@ public class BestNotesBaseActivity extends SherlockFragmentActivity{
 		super.onStop();
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		/* 
-         * 释放资源 
-         */  
-        if (dbHelper != null) {  
-            OpenHelperManager.releaseHelper();  
-            dbHelper = null;  
-        }  
-	}
-	
-	protected BestNotesDBHelper getDbHelper() {
-		if(dbHelper == null){
-			dbHelper = OpenHelperManager  
-                    .getHelper(this, BestNotesDBHelper.class);
-		}
-		return dbHelper;
-	}
-
-	
 }

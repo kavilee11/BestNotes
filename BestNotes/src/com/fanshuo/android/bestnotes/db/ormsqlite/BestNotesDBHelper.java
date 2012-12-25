@@ -21,7 +21,6 @@ public class BestNotesDBHelper extends OrmLiteSqliteOpenHelper {
 
 	private static final String DATABASE_NAME = "BestNotes.db";
 	private static final int DATABASE_VERSION = 1;
-	private Dao<BestNotesTextNoteModel, Integer> textNoteDao = null;
 
 	public BestNotesDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,17 +50,4 @@ public class BestNotesDBHelper extends OrmLiteSqliteOpenHelper {
 		}
 	}
 	
-	@Override 
-	public void close() { 
-	  super.close(); 
-	  textNoteDao = null; 
-	}
-
-	public Dao<BestNotesTextNoteModel, Integer> getTextNoteDao() throws SQLException {
-		if(textNoteDao == null){
-			textNoteDao = getDao(BestNotesTextNoteModel.class);
-		}
-		return textNoteDao;
-	}
-
 }

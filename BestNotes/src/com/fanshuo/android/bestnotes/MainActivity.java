@@ -11,6 +11,9 @@ import android.support.v4.app.ListFragment;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -33,6 +36,7 @@ import com.fanshuo.android.bestnotes.app.fragments.SlideLeftFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.model.SlideLeftListItem;
 import com.fanshuo.android.bestnotes.app.view.SelectionListView;
+import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 import com.fanshuo.android.bestnotes.db.ormsqlite.BestNotesDBHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -45,7 +49,8 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 
 	private ListFragment leftFrag, rightFrag;
 	private SelectionListView lv;
-	private BestNotesDBHelper dbHelper = null;
+	BestNotesTextNoteAdapter adapter;
+	List<BestNotesTextNoteModel> list;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,33 +84,36 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 		
 		
 		///////////////////初始化ListView
-		List<BestNotesTextNoteModel> list = new ArrayList<BestNotesTextNoteModel>();
-		try {
-			Dao<BestNotesTextNoteModel, Integer> dao = getDbHelper().getTextNoteDao();
-			dao.queryBuilder().orderBy("modificationTime", true);
-			QueryBuilder<BestNotesTextNoteModel, Integer> builder = dao.queryBuilder();
-			PreparedQuery<BestNotesTextNoteModel> prepareQuery = builder.orderBy(BestNotesTextNoteModel.MODI_TIME_FIELD_NAME, false).prepare();
-			list = dao.query(prepareQuery);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		list = new ArrayList<BestNotesTextNoteModel>();
+		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
+		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
 		lv = (SelectionListView) findViewById(R.id.main_lv);
-		BestNotesTextNoteAdapter adapter = new BestNotesTextNoteAdapter(this);
+		adapter = new BestNotesTextNoteAdapter(this);
 		adapter.addAll(list);
 		lv.setAdapter(adapter);
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				System.out.println("-------onItemClick");
 			}
 		});
-		
 	}
 
-	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
+		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
+		adapter.clear();
+		adapter.addAll(list);
+		adapter.notifyDataSetChanged();
+	}
+
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
@@ -135,24 +143,4 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 		startActivity(intent);
 	}
 	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		/* 
-         * 释放资源 
-         */  
-        if (dbHelper != null) {  
-            OpenHelperManager.releaseHelper();  
-            dbHelper = null;  
-        }  
-	}
-	
-	protected BestNotesDBHelper getDbHelper() {
-		if(dbHelper == null){
-			dbHelper = OpenHelperManager  
-                    .getHelper(this, BestNotesDBHelper.class);
-		}
-		return dbHelper;
-	}
-
 }

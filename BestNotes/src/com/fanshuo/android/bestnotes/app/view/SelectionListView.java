@@ -7,14 +7,18 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.R;
+import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
+import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
+import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
+import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 
 public class SelectionListView extends ListView {
 	private SherlockFragmentActivity mActivity;
@@ -99,19 +103,15 @@ public class SelectionListView extends ListView {
 		if (mActionMode == null)
 			mActionMode = mActivity.startActionMode(new ModeCallback());
 
-		mActionMode.setTitle(checkedCount + " selected");
+		mActionMode.setTitle(mActivity.getResources().getString(R.string.selected_num, checkedCount));
 
 	}
 
 	class ModeCallback implements ActionMode.Callback {
-
+		
 		@Override
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-
-			menu.add(getResources().getString(R.string.menu_search))
-					.setIcon(R.drawable.ic_menu_search)
-					.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
+			mActivity.getSupportMenuInflater().inflate(R.menu.activity_main_context, menu);
 			return true;
 		}
 
@@ -122,8 +122,20 @@ public class SelectionListView extends ListView {
 
 		@Override
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			Toast.makeText(mActivity, "Delted  items", Toast.LENGTH_SHORT)
-					.show();
+			switch (item.getItemId()) {
+			case R.id.menu_delete:
+				BestNotesTextNoteDao dao = new BestNotesTextNoteDao(mActivity);
+				int total = getCount();
+				for (int i = 0; i < total; i++) {
+					if(isItemChecked(i)){
+						dao.deleteNotes((BestNotesTextNoteModel)getItemAtPosition(i));
+						((BestNotesTextNoteAdapter)getAdapter()).remove((BestNotesTextNoteModel)getItemAtPosition(i));
+					}
+				}
+				((BestNotesTextNoteAdapter)getAdapter()).notifyDataSetChanged();
+				ActivityUtil.showCenterShortToast(mActivity, mActivity.getResources().getString(R.string.delete_success));
+				break;
+			}
 			mode.finish();
 			return true;
 		}

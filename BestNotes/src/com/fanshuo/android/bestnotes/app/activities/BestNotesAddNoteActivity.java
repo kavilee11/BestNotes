@@ -11,6 +11,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
+import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 import com.j256.ormlite.dao.Dao;
 
 /**
@@ -53,23 +54,22 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 				ActivityUtil.showCenterShortToast(this, getResources()
 						.getString(R.string.please_input_title));
 			} else {
-				try {
-					Dao<BestNotesTextNoteModel, Integer> dao = getDbHelper()
-							.getTextNoteDao();
-					BestNotesTextNoteModel note = new BestNotesTextNoteModel();
-					note.setContent(et_content.getText().toString());
-					note.setCreateTime(System.currentTimeMillis());
-					note.setModificationTime(System.currentTimeMillis());
-					note.setTitle(et_title.getText().toString());
-					dao.create(note);
+				BestNotesTextNoteModel note = new BestNotesTextNoteModel();
+				note.setContent(et_content.getText().toString());
+				note.setCreateTime(System.currentTimeMillis());
+				note.setModificationTime(System.currentTimeMillis());
+				note.setTitle(et_title.getText().toString());
+				BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
+				int ret = dao.addNote(note);
+				if (ret == 1) {
 					ActivityUtil.showCenterShortToast(this, getResources()
 							.getString(R.string.save_success));
 					this.finish();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} else {
 					ActivityUtil.showCenterShortToast(this, getResources()
 							.getString(R.string.save_faild));
 				}
+
 			}
 			break;
 		}

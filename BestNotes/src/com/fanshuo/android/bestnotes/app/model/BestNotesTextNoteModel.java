@@ -6,41 +6,34 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "TextNotes")
 public class BestNotesTextNoteModel {
 
-	public static final String MODI_TIME_FIELD_NAME = "modificationTime";
+	public static final String ID = "_id";
+	public static final String TITLE = "title";
+	public static final String CONTENT = "content";
+	public static final String FAVORITE = "favorite";
+	public static final String IMPORTANT = "important";
+	public static final String CREATE_TIME = "createTime";
+	public static final String MODIFY_TIME = "modificationTime";
 	
-	
-	@DatabaseField(generatedId = true)
+	@DatabaseField(generatedId=true,useGetSet=true,columnName=ID)
 	int _id;
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=TITLE) 
 	String title;
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=CONTENT) 
 	String content;
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=FAVORITE) 
 	boolean favorite;// 是否标记为收藏
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=IMPORTANT) 
 	boolean important;// 是否标记为重要
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=CREATE_TIME) 
 	long createTime;// 创建时间
-	@DatabaseField
+	@DatabaseField(useGetSet=true,columnName=MODIFY_TIME) 
 	long modificationTime;// 最后修改时间
+	
 	
 	public BestNotesTextNoteModel() {
 		super();
 	}
 	
-	public BestNotesTextNoteModel(int _id, String title, String content,
-			boolean favorite, boolean important, long createTime,
-			long modificationTime) {
-		super();
-		this._id = _id;
-		this.title = title;
-		this.content = content;
-		this.favorite = favorite;
-		this.important = important;
-		this.createTime = createTime;
-		this.modificationTime = modificationTime;
-	}
-
 	public int get_id() {
 		return _id;
 	}
@@ -65,7 +58,7 @@ public class BestNotesTextNoteModel {
 		this.content = content;
 	}
 
-	public boolean isFavorite() {
+	public boolean getFavorite() {
 		return favorite;
 	}
 
@@ -73,7 +66,7 @@ public class BestNotesTextNoteModel {
 		this.favorite = favorite;
 	}
 
-	public boolean isImportant() {
+	public boolean getImportant() {
 		return important;
 	}
 

@@ -10,7 +10,8 @@ package com.fanshuo.android.bestnotes;
 public final class R {
     public static final class anim {
         public static final int cycle=0x7f040000;
-        public static final int shake_5=0x7f040001;
+        public static final int list_slide_up=0x7f040001;
+        public static final int shake_5=0x7f040002;
     }
     public static final class array {
         public static final int main_action_spinner=0x7f0c0000;
@@ -1056,34 +1057,35 @@ containing a value of this type.
         public static final int defaultshadow=0x7f020083;
         public static final int defaultshadowright=0x7f020084;
         public static final int ic_launcher=0x7f020085;
-        public static final int ic_menu_moreoverflow=0x7f020086;
-        public static final int ic_menu_moreoverflow_normal=0x7f020087;
-        public static final int ic_menu_new=0x7f020088;
-        public static final int ic_menu_save=0x7f020089;
-        public static final int ic_menu_search=0x7f02008a;
-        public static final int ic_menu_share=0x7f02008b;
-        public static final int list_focused_bestnotes=0x7f02008c;
-        public static final int menu_dropdown_panel_bestnotes=0x7f02008d;
-        public static final int menu_hardkey_panel_bestnotes=0x7f02008e;
-        public static final int pressed_background_bestnotes=0x7f02008f;
-        public static final int progress_bg_bestnotes=0x7f020090;
-        public static final int progress_horizontal_bestnotes=0x7f020091;
-        public static final int progress_primary_bestnotes=0x7f020092;
-        public static final int progress_secondary_bestnotes=0x7f020093;
-        public static final int selectable_background_bestnotes=0x7f020094;
-        public static final int shadow=0x7f020095;
-        public static final int shadowright=0x7f020096;
-        public static final int spinner_ab_default_bestnotes=0x7f020097;
-        public static final int spinner_ab_disabled_bestnotes=0x7f020098;
-        public static final int spinner_ab_focused_bestnotes=0x7f020099;
-        public static final int spinner_ab_pressed_bestnotes=0x7f02009a;
-        public static final int spinner_background_ab_bestnotes=0x7f02009b;
-        public static final int tab_indicator_ab_bestnotes=0x7f02009c;
-        public static final int tab_selected_bestnotes=0x7f02009d;
-        public static final int tab_selected_focused_bestnotes=0x7f02009e;
-        public static final int tab_selected_pressed_bestnotes=0x7f02009f;
-        public static final int tab_unselected_focused_bestnotes=0x7f0200a0;
-        public static final int tab_unselected_pressed_bestnotes=0x7f0200a1;
+        public static final int ic_menu_delete=0x7f020086;
+        public static final int ic_menu_moreoverflow=0x7f020087;
+        public static final int ic_menu_moreoverflow_normal=0x7f020088;
+        public static final int ic_menu_new=0x7f020089;
+        public static final int ic_menu_save=0x7f02008a;
+        public static final int ic_menu_search=0x7f02008b;
+        public static final int ic_menu_share=0x7f02008c;
+        public static final int list_focused_bestnotes=0x7f02008d;
+        public static final int menu_dropdown_panel_bestnotes=0x7f02008e;
+        public static final int menu_hardkey_panel_bestnotes=0x7f02008f;
+        public static final int pressed_background_bestnotes=0x7f020090;
+        public static final int progress_bg_bestnotes=0x7f020091;
+        public static final int progress_horizontal_bestnotes=0x7f020092;
+        public static final int progress_primary_bestnotes=0x7f020093;
+        public static final int progress_secondary_bestnotes=0x7f020094;
+        public static final int selectable_background_bestnotes=0x7f020095;
+        public static final int shadow=0x7f020096;
+        public static final int shadowright=0x7f020097;
+        public static final int spinner_ab_default_bestnotes=0x7f020098;
+        public static final int spinner_ab_disabled_bestnotes=0x7f020099;
+        public static final int spinner_ab_focused_bestnotes=0x7f02009a;
+        public static final int spinner_ab_pressed_bestnotes=0x7f02009b;
+        public static final int spinner_background_ab_bestnotes=0x7f02009c;
+        public static final int tab_indicator_ab_bestnotes=0x7f02009d;
+        public static final int tab_selected_bestnotes=0x7f02009e;
+        public static final int tab_selected_focused_bestnotes=0x7f02009f;
+        public static final int tab_selected_pressed_bestnotes=0x7f0200a0;
+        public static final int tab_unselected_focused_bestnotes=0x7f0200a1;
+        public static final int tab_unselected_pressed_bestnotes=0x7f0200a2;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050027;
@@ -1126,9 +1128,9 @@ containing a value of this type.
         public static final int abs__title=0x7f050020;
         public static final int abs__titleDivider=0x7f050021;
         public static final int abs__up=0x7f05000b;
-        public static final int action1=0x7f05004a;
-        public static final int action2=0x7f05004b;
-        public static final int action3=0x7f05004c;
+        public static final int action1=0x7f05004b;
+        public static final int action2=0x7f05004c;
+        public static final int action3=0x7f05004d;
         public static final int checkbox=0x7f05003b;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f05002c;
@@ -1142,6 +1144,7 @@ containing a value of this type.
         public static final int listMode=0x7f050002;
         public static final int main_lv=0x7f050038;
         public static final int margin=0x7f050012;
+        public static final int menu_delete=0x7f05004a;
         public static final int menu_new=0x7f050048;
         public static final int menu_save=0x7f050047;
         public static final int menu_search=0x7f050049;
@@ -1211,7 +1214,8 @@ containing a value of this type.
     public static final class menu {
         public static final int activity_add_note=0x7f0d0000;
         public static final int activity_main=0x7f0d0001;
-        public static final int context_menu=0x7f0d0002;
+        public static final int activity_main_context=0x7f0d0002;
+        public static final int context_menu=0x7f0d0003;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1260,17 +1264,20 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0009;
         public static final int app_name=0x7f0a000f;
-        public static final int content=0x7f0a001a;
+        public static final int content=0x7f0a001b;
+        public static final int delete_success=0x7f0a001c;
         public static final int hello_world=0x7f0a0010;
         public static final int menu_add_note=0x7f0a0014;
+        public static final int menu_delete=0x7f0a0016;
         public static final int menu_more=0x7f0a0013;
         public static final int menu_save=0x7f0a0015;
         public static final int menu_search=0x7f0a0011;
         public static final int menu_share=0x7f0a0012;
-        public static final int please_input_title=0x7f0a0018;
-        public static final int save_faild=0x7f0a0017;
-        public static final int save_success=0x7f0a0016;
-        public static final int title=0x7f0a0019;
+        public static final int please_input_title=0x7f0a0019;
+        public static final int save_faild=0x7f0a0018;
+        public static final int save_success=0x7f0a0017;
+        public static final int selected_num=0x7f0a001d;
+        public static final int title=0x7f0a001a;
     }
     public static final class style {
         /** 

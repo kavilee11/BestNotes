@@ -8,11 +8,14 @@
     <string name="menu_more">more</string>
     <string name="menu_add_note">add a note</string>
     <string name="menu_save">save</string>
+    <string name="menu_delete">delete</string>
     <string name="save_success">save success</string>
     <string name="save_faild">save faild</string>
     <string name="please_input_title">please input title</string>
     
     <string name="title">title</string>
     <string name="content">content</string>
+    <string name="delete_success">delete success</string>
+    <string name="selected_num">%1$s selected</string>
 
 </resources>
