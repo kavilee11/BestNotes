@@ -17,13 +17,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.R;
 
 public class SelectionListView extends ListView {
-
-	public SelectionListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		mActivity = (SherlockFragmentActivity) context;
-	}
-
 	private SherlockFragmentActivity mActivity;
 	ActionMode mActionMode;
 
@@ -35,6 +28,12 @@ public class SelectionListView extends ListView {
 
 	public SelectionListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		mActivity = (SherlockFragmentActivity) context;
+	}
+
+	public SelectionListView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
 		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		mActivity = (SherlockFragmentActivity) context;
 	}
@@ -78,7 +77,6 @@ public class SelectionListView extends ListView {
 		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
 		default:
-			System.out.println("-----------defalut");
 			mSelectionMode = false;
 			int mItemPosition = pointToPosition(x, y);
 			if (mStartPosition != ListView.INVALID_POSITION)
