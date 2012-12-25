@@ -3,8 +3,6 @@ package com.fanshuo.android.bestnotes.app.activities;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.fanshuo.android.bestnotes.db.ormsqlite.BestNotesDBHelper;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 public class BestNotesBaseActivity extends SherlockFragmentActivity{
 

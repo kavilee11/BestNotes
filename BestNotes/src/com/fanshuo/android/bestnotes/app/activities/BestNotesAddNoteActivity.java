@@ -48,28 +48,24 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 			this.finish();
 			break;
 		case R.id.menu_save:
+			BestNotesTextNoteModel note = new BestNotesTextNoteModel();
 			if (TextUtils.isEmpty(et_title.getText().toString())) {
-				et_title.requestFocus();
-				ActivityUtil.shakeView5Pix(this, et_title);
+				et_title.setText(getResources().getString(
+						R.string.untitled_notes));
+			}
+			note.setContent(et_content.getText().toString());
+			note.setCreateTime(System.currentTimeMillis());
+			note.setModificationTime(System.currentTimeMillis());
+			note.setTitle(et_title.getText().toString());
+			BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
+			int ret = dao.addNote(note);
+			if (ret == 1) {
 				ActivityUtil.showCenterShortToast(this, getResources()
-						.getString(R.string.please_input_title));
+						.getString(R.string.save_success));
+				this.finish();
 			} else {
-				BestNotesTextNoteModel note = new BestNotesTextNoteModel();
-				note.setContent(et_content.getText().toString());
-				note.setCreateTime(System.currentTimeMillis());
-				note.setModificationTime(System.currentTimeMillis());
-				note.setTitle(et_title.getText().toString());
-				BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
-				int ret = dao.addNote(note);
-				if (ret == 1) {
-					ActivityUtil.showCenterShortToast(this, getResources()
-							.getString(R.string.save_success));
-					this.finish();
-				} else {
-					ActivityUtil.showCenterShortToast(this, getResources()
-							.getString(R.string.save_faild));
-				}
-
+				ActivityUtil.showCenterShortToast(this, getResources()
+						.getString(R.string.save_faild));
 			}
 			break;
 		}

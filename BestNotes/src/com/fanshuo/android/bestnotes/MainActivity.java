@@ -1,6 +1,5 @@
 package com.fanshuo.android.bestnotes;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,50 +7,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.util.SparseBooleanArray;
 import android.view.View;
-import android.view.View.OnLongClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.ShareActionProvider;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesAddNoteActivity;
+import com.fanshuo.android.bestnotes.app.activities.BestNotesInnerPagerActivity;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
-import com.fanshuo.android.bestnotes.app.adapters.SlideLeftFragmentAdapter;
 import com.fanshuo.android.bestnotes.app.fragments.SlideLeftFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
-import com.fanshuo.android.bestnotes.app.model.SlideLeftListItem;
 import com.fanshuo.android.bestnotes.app.view.SelectionListView;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
-import com.fanshuo.android.bestnotes.db.ormsqlite.BestNotesDBHelper;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity implements ActionBar.OnNavigationListener{
+public class MainActivity extends SlidingFragmentActivity implements
+		ActionBar.OnNavigationListener,
+		OnItemClickListener{
 
 	private ListFragment leftFrag, rightFrag;
 	private SelectionListView lv;
 	BestNotesTextNoteAdapter adapter;
 	List<BestNotesTextNoteModel> list;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,23 +50,25 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 		sm.setSecondaryMenu(R.layout.fram_slide_right);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		getSlidingMenu().setBehindScrollScale(0);
-		
-		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+
+		FragmentTransaction t = this.getSupportFragmentManager()
+				.beginTransaction();
 		leftFrag = new SlideLeftFragment();
 		t.replace(R.id.frame_left, leftFrag);
 		rightFrag = new SlideLeftFragment();
 		t.replace(R.id.frame_right, rightFrag);
 		t.commit();
-		
+
 		getSupportActionBar().setTitle("");
 		getSupportActionBar().setHomeButtonEnabled(true);
-		//增加下拉列表
+		// 增加下拉列表
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.main_action_spinner, android.R.layout.simple_list_item_1);
+		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this,
+				R.array.main_action_spinner,
+				android.R.layout.simple_list_item_1);
 		getSupportActionBar().setListNavigationCallbacks(mSpinnerAdapter, this);
-		
-		
-		///////////////////初始化ListView
+
+		// /////////////////初始化ListView
 		list = new ArrayList<BestNotesTextNoteModel>();
 		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
@@ -91,20 +76,14 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 		adapter = new BestNotesTextNoteAdapter(this);
 		adapter.addAll(list);
 		lv.setAdapter(adapter);
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				System.out.println("-------onItemClick");
-			}
-		});
+
+		lv.setOnItemClickListener(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
 		adapter.clear();
@@ -112,14 +91,12 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 		adapter.notifyDataSetChanged();
 	}
 
-
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -134,13 +111,21 @@ public class MainActivity extends SlidingFragmentActivity implements ActionBar.O
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		return false;
 	}
-	
-	private void bnStartActivity(Class<?> cls, Bundle bundle){
+
+	private void bnStartActivity(Class<?> cls, Bundle bundle) {
 		Intent intent = new Intent(this, cls);
-		if(bundle != null){
+		if (bundle != null) {
 			intent.putExtras(bundle);
 		}
 		startActivity(intent);
 	}
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent intent = new Intent(this, BestNotesInnerPagerActivity.class);
+		intent.putExtra(Constants.BundleKey.CLICKED_POSITION, position);
+		startActivity(intent);
+	}
+
 }

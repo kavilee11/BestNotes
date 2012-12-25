@@ -17,5 +17,7 @@
     <string name="content">content</string>
     <string name="delete_success">delete success</string>
     <string name="selected_num">%1$s selected</string>
+    <string name="untitled_notes">Untitled notes</string>
+    <string name="content_is_empty">Content is empty</string>
 
 </resources>

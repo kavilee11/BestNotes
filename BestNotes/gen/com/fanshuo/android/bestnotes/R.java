@@ -1128,43 +1128,44 @@ containing a value of this type.
         public static final int abs__title=0x7f050020;
         public static final int abs__titleDivider=0x7f050021;
         public static final int abs__up=0x7f05000b;
-        public static final int action1=0x7f05004b;
-        public static final int action2=0x7f05004c;
-        public static final int action3=0x7f05004d;
-        public static final int checkbox=0x7f05003b;
+        public static final int action1=0x7f05004c;
+        public static final int action2=0x7f05004d;
+        public static final int action3=0x7f05004e;
+        public static final int checkbox=0x7f05003c;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f05002c;
         public static final int et_content=0x7f05003a;
         public static final int et_title=0x7f050039;
-        public static final int frame_left=0x7f05003f;
-        public static final int frame_right=0x7f050040;
+        public static final int frame_left=0x7f050040;
+        public static final int frame_right=0x7f050041;
         public static final int fullscreen=0x7f050013;
         public static final int homeAsUp=0x7f050006;
         public static final int left=0x7f050010;
         public static final int listMode=0x7f050002;
         public static final int main_lv=0x7f050038;
         public static final int margin=0x7f050012;
-        public static final int menu_delete=0x7f05004a;
-        public static final int menu_new=0x7f050048;
-        public static final int menu_save=0x7f050047;
-        public static final int menu_search=0x7f050049;
+        public static final int menu_delete=0x7f05004b;
+        public static final int menu_new=0x7f050049;
+        public static final int menu_save=0x7f050048;
+        public static final int menu_search=0x7f05004a;
         public static final int normal=0x7f050001;
         public static final int right=0x7f050011;
-        public static final int row_icon=0x7f050041;
-        public static final int row_title=0x7f050042;
+        public static final int row_icon=0x7f050042;
+        public static final int row_title=0x7f050043;
         public static final int selected_view=0x7f050014;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
-        public static final int slidingmenulayout=0x7f050044;
-        public static final int slidingmenumain=0x7f050043;
-        public static final int slidingmenurowicon=0x7f050045;
-        public static final int slidingmenurowtitle=0x7f050046;
+        public static final int slidingmenulayout=0x7f050045;
+        public static final int slidingmenumain=0x7f050044;
+        public static final int slidingmenurowicon=0x7f050046;
+        public static final int slidingmenurowtitle=0x7f050047;
         public static final int tabMode=0x7f050003;
-        public static final int textview_content=0x7f05003e;
-        public static final int textview_time=0x7f05003d;
-        public static final int textview_title=0x7f05003c;
+        public static final int textview_content=0x7f05003f;
+        public static final int textview_time=0x7f05003e;
+        public static final int textview_title=0x7f05003d;
         public static final int useLogo=0x7f050004;
+        public static final int viewpager=0x7f05003b;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -1197,19 +1198,20 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030016;
         public static final int activity_main=0x7f030017;
         public static final int bestnotes_activity_add_note=0x7f030018;
-        public static final int bestnotes_item_mainlist=0x7f030019;
-        public static final int fragment_slide_left=0x7f03001a;
-        public static final int fram_slide_left=0x7f03001b;
-        public static final int fram_slide_right=0x7f03001c;
-        public static final int item_slide_left_list=0x7f03001d;
-        public static final int item_spinner_adapter=0x7f03001e;
-        public static final int list=0x7f03001f;
-        public static final int shadow=0x7f030020;
-        public static final int sherlock_spinner_dropdown_item=0x7f030021;
-        public static final int sherlock_spinner_item=0x7f030022;
-        public static final int slidingmenumain=0x7f030023;
-        public static final int slidingmenumainlist=0x7f030024;
-        public static final int slidingmenurow=0x7f030025;
+        public static final int bestnotes_activity_inner=0x7f030019;
+        public static final int bestnotes_item_mainlist=0x7f03001a;
+        public static final int fragment_slide_left=0x7f03001b;
+        public static final int fram_slide_left=0x7f03001c;
+        public static final int fram_slide_right=0x7f03001d;
+        public static final int item_slide_left_list=0x7f03001e;
+        public static final int item_spinner_adapter=0x7f03001f;
+        public static final int list=0x7f030020;
+        public static final int shadow=0x7f030021;
+        public static final int sherlock_spinner_dropdown_item=0x7f030022;
+        public static final int sherlock_spinner_item=0x7f030023;
+        public static final int slidingmenumain=0x7f030024;
+        public static final int slidingmenumainlist=0x7f030025;
+        public static final int slidingmenurow=0x7f030026;
     }
     public static final class menu {
         public static final int activity_add_note=0x7f0d0000;
@@ -1265,6 +1267,7 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0009;
         public static final int app_name=0x7f0a000f;
         public static final int content=0x7f0a001b;
+        public static final int content_is_empty=0x7f0a001f;
         public static final int delete_success=0x7f0a001c;
         public static final int hello_world=0x7f0a0010;
         public static final int menu_add_note=0x7f0a0014;
@@ -1278,6 +1281,7 @@ containing a value of this type.
         public static final int save_success=0x7f0a0017;
         public static final int selected_num=0x7f0a001d;
         public static final int title=0x7f0a001a;
+        public static final int untitled_notes=0x7f0a001e;
     }
     public static final class style {
         /** 

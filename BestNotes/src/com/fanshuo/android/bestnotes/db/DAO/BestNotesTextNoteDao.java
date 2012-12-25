@@ -37,6 +37,21 @@ public class BestNotesTextNoteDao {
 	}
 	
 	/**
+	 * 根据ID查询笔记
+	 * @param id
+	 * @return
+	 */
+	public BestNotesTextNoteModel getTextNoteById(int id){
+		BestNotesTextNoteModel note = null;
+		try {
+			note = dao.queryForId(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return note;
+	}
+	
+	/**
 	 * 获取所有笔记
 	 * @param orderByFiledName 排序所依据的字段
 	 * @param ascending	是否升序排列
