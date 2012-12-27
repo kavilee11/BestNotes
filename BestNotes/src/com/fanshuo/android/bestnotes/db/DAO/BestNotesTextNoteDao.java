@@ -84,13 +84,13 @@ public class BestNotesTextNoteDao {
 	}
 	
 	/**
-	 * 删除一个笔记
+	 * 删除笔记
 	 * @param note
 	 * @return
 	 */
-	public int deleteNotes(BestNotesTextNoteModel note){
+	public int deleteNotes(List<BestNotesTextNoteModel> toBeDelete){
 		try {
-			return dao.delete(note);
+			return dao.delete(toBeDelete);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;

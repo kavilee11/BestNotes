@@ -74,7 +74,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
 		lv = (SelectionListView) findViewById(R.id.main_lv);
 		adapter = new BestNotesTextNoteAdapter(this);
-		adapter.addAll(list);
+		for (BestNotesTextNoteModel item : list) {
+			adapter.add(item);
+		}
 		lv.setAdapter(adapter);
 
 		lv.setOnItemClickListener(this);
@@ -87,7 +89,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
 		adapter.clear();
-		adapter.addAll(list);
+		for (BestNotesTextNoteModel item : list) {
+			adapter.add(item);
+		}
 		adapter.notifyDataSetChanged();
 	}
 

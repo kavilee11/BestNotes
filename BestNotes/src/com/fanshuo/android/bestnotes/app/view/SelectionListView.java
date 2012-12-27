@@ -1,5 +1,8 @@
 package com.fanshuo.android.bestnotes.app.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
@@ -7,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,28 +24,38 @@ import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 
-public class SelectionListView extends ListView {
+public class SelectionListView extends ListView{
 	private SherlockFragmentActivity mActivity;
 	ActionMode mActionMode;
+	private boolean inSelectionMode = false;
 
 	public SelectionListView(Context context) {
 		super(context);
 		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		mActivity = (SherlockFragmentActivity) context;
+		init();
 	}
 
 	public SelectionListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		mActivity = (SherlockFragmentActivity) context;
+		init();
 	}
 
 	public SelectionListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		mActivity = (SherlockFragmentActivity) context;
+		init();
+	}
+	
+	private void init(){
+		setOnItemLongClickListener(new LongClickListener());
 	}
 
+	
+	
 	@Override
 	public boolean performItemClick(View view, int position, long id) {
 		OnItemClickListener mOnItemClickListener = getOnItemClickListener();
@@ -49,20 +63,17 @@ public class SelectionListView extends ListView {
 			playSoundEffect(SoundEffectConstants.CLICK);
 			if (view != null)
 				view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
-			mOnItemClickListener.onItemClick(this, view, position, id);
+			if(inSelectionMode){
+				setItemChecked(position, !isItemChecked(position));
+			}else{
+				mOnItemClickListener.onItemClick(this, view, position, id);
+			}
 			return true;
 		}
 		return false;
 	}
 
-	boolean mSelectionMode = false;
-	public boolean ismSelectionMode() {
-		return mSelectionMode;
-	}
-	public void setmSelectionMode(boolean mSelectionMode) {
-		this.mSelectionMode = mSelectionMode;
-	}
-
+	/*boolean mSelectionMode = false;
 	int startX,startY;
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
@@ -90,11 +101,12 @@ public class SelectionListView extends ListView {
 		default:
 			mSelectionMode = false;
 			int mItemPosition = pointToPosition(x, y);
+			if(mItemPosition != ListView.INVALID_POSITION)
 				setItemChecked(mItemPosition, !isItemChecked(mItemPosition));
 		}
 
 		return true;
-	}
+	}*/
 
 	@Override
 	public void setItemChecked(int position, boolean value) {
@@ -118,6 +130,7 @@ public class SelectionListView extends ListView {
 		@Override
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 			mActivity.getSupportMenuInflater().inflate(R.menu.activity_main_context, menu);
+			inSelectionMode = true;
 			return true;
 		}
 
@@ -131,12 +144,16 @@ public class SelectionListView extends ListView {
 			switch (item.getItemId()) {
 			case R.id.menu_delete:
 				BestNotesTextNoteDao dao = new BestNotesTextNoteDao(mActivity);
+				List<BestNotesTextNoteModel> toBeDelete = new ArrayList<BestNotesTextNoteModel>();
 				int total = getCount();
 				for (int i = 0; i < total; i++) {
 					if(isItemChecked(i)){
-						dao.deleteNotes((BestNotesTextNoteModel)getItemAtPosition(i));
-						((BestNotesTextNoteAdapter)getAdapter()).remove((BestNotesTextNoteModel)getItemAtPosition(i));
+						toBeDelete.add((BestNotesTextNoteModel)getItemAtPosition(i));
 					}
+				}
+				dao.deleteNotes(toBeDelete);
+				for (BestNotesTextNoteModel bestNotesTextNoteModel : toBeDelete) {
+					((BestNotesTextNoteAdapter)getAdapter()).remove(bestNotesTextNoteModel);
 				}
 				((BestNotesTextNoteAdapter)getAdapter()).notifyDataSetChanged();
 				ActivityUtil.showCenterShortToast(mActivity, mActivity.getResources().getString(R.string.delete_success));
@@ -148,6 +165,7 @@ public class SelectionListView extends ListView {
 
 		@Override
 		public void onDestroyActionMode(ActionMode mode) {
+			inSelectionMode = false;
 			mActionMode = null;
 			clearChecked();
 		}
@@ -159,6 +177,17 @@ public class SelectionListView extends ListView {
 		for (int i = 0; i < CItem.size(); i++)
 			if (CItem.valueAt(i))
 				super.setItemChecked(CItem.keyAt(i), false);
+	}
+	
+	class LongClickListener implements OnItemLongClickListener{
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> parent, View view,
+				int position, long id) {
+			setItemChecked(position, !isItemChecked(position));
+			return true;
+		}
+		
 	}
 
 }
