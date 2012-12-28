@@ -169,15 +169,15 @@ public final class R {
 		public static final int abs__bright_foreground_holo_light = 0x7f070003;
 		public static final int abs__bright_foreground_holo_dark = 0x7f070002;
 		public static final int abs__bright_foreground_disabled_holo_light = 0x7f070005;
-		public static final int abs__primary_text_disable_only_holo_dark = 0x7f07000b;
+		public static final int abs__primary_text_disable_only_holo_dark = 0x7f07000c;
 		public static final int abs__bright_foreground_inverse_holo_dark = 0x7f070006;
 		public static final int holo_blue_bright = 0x7f070009;
 		public static final int abs__background_holo_dark = 0x7f070000;
-		public static final int abs__primary_text_disable_only_holo_light = 0x7f07000c;
+		public static final int abs__primary_text_disable_only_holo_light = 0x7f07000d;
 		public static final int abs__background_holo_light = 0x7f070001;
 		public static final int abs__bright_foreground_disabled_holo_dark = 0x7f070004;
-		public static final int abs__primary_text_holo_dark = 0x7f07000d;
-		public static final int abs__primary_text_holo_light = 0x7f07000e;
+		public static final int abs__primary_text_holo_dark = 0x7f07000e;
+		public static final int abs__primary_text_holo_light = 0x7f07000f;
 	}
 	public static final class string {
 		public static final int abs__action_bar_up_description = 0x7f0a0001;
@@ -412,7 +412,7 @@ public final class R {
 		public static final int abs__ic_clear_search_api_disabled_holo_light = 0x7f02002c;
 		public static final int abs__ab_share_pack_holo_light = 0x7f02000a;
 		public static final int abs__ic_clear_normal = 0x7f02002b;
-		public static final int defaultshadowright = 0x7f020084;
+		public static final int defaultshadowright = 0x7f020085;
 		public static final int abs__ab_solid_light_holo = 0x7f02000c;
 		public static final int abs__ic_clear_holo_light = 0x7f02002a;
 		public static final int abs__ic_search = 0x7f020036;
@@ -437,7 +437,7 @@ public final class R {
 		public static final int abs__menu_dropdown_panel_holo_dark = 0x7f020049;
 		public static final int abs__activated_background_holo_light = 0x7f020015;
 		public static final int abs__ic_search_api_holo_light = 0x7f020037;
-		public static final int defaultshadow = 0x7f020083;
+		public static final int defaultshadow = 0x7f020084;
 		public static final int abs__cab_background_bottom_holo_light = 0x7f02001f;
 		public static final int abs__btn_cab_done_holo_dark = 0x7f02001a;
 		public static final int abs__cab_background_bottom_holo_dark = 0x7f02001e;
