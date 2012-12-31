@@ -40,7 +40,7 @@ public class BestNotesInnerPageFragment extends BestNotesBaseFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		dao = new BestNotesTextNoteDao(getActivity());
-		BestNotesTextNoteModel note = dao.getTextNoteById(noteID);
+		BestNotesTextNoteModel note = dao.getTextNoteById(noteID, true);
 		String newContent = (note.getContent()).replace("\n", "<br>");// 把\n换成html中的换行符
 		note.setContent(newContent);
 		View view = inflater.inflate(R.layout.bestnotes_fragment_inner_page, null);

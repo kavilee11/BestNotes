@@ -151,7 +151,7 @@ public class SelectionListView extends ListView{
 						toBeDelete.add((BestNotesTextNoteModel)getItemAtPosition(i));
 					}
 				}
-				dao.deleteNotes(toBeDelete);
+				dao.deleteNotes(toBeDelete, true);
 				for (BestNotesTextNoteModel bestNotesTextNoteModel : toBeDelete) {
 					((BestNotesTextNoteAdapter)getAdapter()).remove(bestNotesTextNoteModel);
 				}

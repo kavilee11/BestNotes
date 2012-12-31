@@ -19,7 +19,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesAddNoteActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesInnerPagerActivity;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
-import com.fanshuo.android.bestnotes.app.fragments.SlideLeftFragment;
+import com.fanshuo.android.bestnotes.app.fragments.SlideRightFragment;
+import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.view.SelectionListView;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
@@ -29,8 +30,8 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity implements
 		ActionBar.OnNavigationListener,
 		OnItemClickListener{
-
-	private ListFragment leftFrag, rightFrag;
+	private SlideLeftListFragment leftFrag;
+	private ListFragment rightFrag;
 	private SelectionListView lv;
 	BestNotesTextNoteAdapter adapter;
 	List<BestNotesTextNoteModel> list;
@@ -53,9 +54,9 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		leftFrag = new SlideLeftFragment();
+		leftFrag = new SlideLeftListFragment();
 		t.replace(R.id.frame_left, leftFrag);
-		rightFrag = new SlideLeftFragment();
+		rightFrag = new SlideRightFragment();
 		t.replace(R.id.frame_right, rightFrag);
 		t.commit();
 

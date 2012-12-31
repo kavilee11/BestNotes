@@ -1,23 +1,25 @@
 package com.fanshuo.android.bestnotes.app.model;
 
-import java.util.Calendar;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "TextNotes")
-public class BestNotesTextNoteModel {
+@DatabaseTable(tableName = "DeletedTextNotes")
+public class BestNotesDeletedTextNoteModel {
 
 	public static final String ID = "_id";
+	public static final String NOTE_ID = "noteId";
 	public static final String TITLE = "title";
 	public static final String CONTENT = "content";
 	public static final String FAVORITE = "favorite";
 	public static final String IMPORTANT = "important";
 	public static final String CREATE_TIME = "createTime";
 	public static final String MODIFY_TIME = "modificationTime";
+	public static final String DELETED_TIME = "deletedTime";
 	
 	@DatabaseField(generatedId=true,useGetSet=true,columnName=ID)
 	int _id;
+	@DatabaseField(useGetSet=true,columnName=NOTE_ID) 
+	int noteId;
 	@DatabaseField(useGetSet=true,columnName=TITLE) 
 	String title;
 	@DatabaseField(useGetSet=true,columnName=CONTENT) 
@@ -30,27 +32,10 @@ public class BestNotesTextNoteModel {
 	long createTime;// 创建时间
 	@DatabaseField(useGetSet=true,columnName=MODIFY_TIME) 
 	long modificationTime;// 最后修改时间
+	@DatabaseField(useGetSet=true,columnName=DELETED_TIME) 
+	long deletedTime;
 	
-	int year;
-	int month;
-	int date;
-	public int getYear() {
-		Calendar date = Calendar.getInstance();
-		date.setTimeInMillis(getCreateTime());
-		return date.get(Calendar.YEAR);
-	}
-	public int getMonth() {
-		Calendar date = Calendar.getInstance();
-		date.setTimeInMillis(getCreateTime());
-		return date.get(Calendar.MONTH) + 1;
-	}
-	public int getDate() {
-		Calendar date = Calendar.getInstance();
-		date.setTimeInMillis(getCreateTime());
-		return date.get(Calendar.DAY_OF_MONTH);
-	}
-
-	public BestNotesTextNoteModel() {
+	public BestNotesDeletedTextNoteModel() {
 		super();
 	}
 	
@@ -62,6 +47,12 @@ public class BestNotesTextNoteModel {
 		this._id = _id;
 	}
 
+	public int getNoteId() {
+		return noteId;
+	}
+	public void setNoteId(int noteId) {
+		this.noteId = noteId;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -108,6 +99,25 @@ public class BestNotesTextNoteModel {
 
 	public void setModificationTime(long modificationTime) {
 		this.modificationTime = modificationTime;
+	}
+	
+	public long getDeletedTime() {
+		return deletedTime;
+	}
+
+	public void setDeletedTime(long deletedTime) {
+		this.deletedTime = deletedTime;
+	}
+
+	public void setDataFromTextNote(BestNotesTextNoteModel note){
+		this.setContent(note.getContent());
+		this.setCreateTime(note.getCreateTime());
+		this.setFavorite(note.getFavorite());
+		this.setImportant(note.getImportant());
+		this.setModificationTime(note.getModificationTime());
+		this.setNoteId(note.get_id());
+		this.setTitle(note.getTitle());
+		this.setDeletedTime(System.currentTimeMillis());
 	}
 
 	@Override

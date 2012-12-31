@@ -6,9 +6,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.fanshuo.android.bestnotes.app.model.BestNotesDeletedTextNoteModel;
+import com.fanshuo.android.bestnotes.app.model.BestNotesOperationModel;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -31,6 +32,10 @@ public class BestNotesDBHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			TableUtils.createTable(connectionSource,
 					BestNotesTextNoteModel.class);
+			TableUtils.createTable(connectionSource,
+					BestNotesOperationModel.class);
+			TableUtils.createTable(connectionSource,
+					BestNotesDeletedTextNoteModel.class);
 		} catch (SQLException e) {
 			Log.e(BestNotesDBHelper.class.getName(), "创建数据库失败", e);
 			e.printStackTrace();
@@ -43,11 +48,15 @@ public class BestNotesDBHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			TableUtils.dropTable(connectionSource,
 					BestNotesTextNoteModel.class, true);
+			TableUtils.dropTable(connectionSource,
+					BestNotesOperationModel.class, true);
+			TableUtils.dropTable(connectionSource,
+					BestNotesDeletedTextNoteModel.class, true);
 			onCreate(arg0, connectionSource);
 		} catch (SQLException e) {
 			Log.e(BestNotesDBHelper.class.getName(), "更新数据库失败", e);
 			e.printStackTrace();
 		}
 	}
-	
+
 }

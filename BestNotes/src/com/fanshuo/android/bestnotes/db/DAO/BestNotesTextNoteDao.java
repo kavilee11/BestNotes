@@ -6,11 +6,12 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.fanshuo.android.bestnotes.Constants;
+import com.fanshuo.android.bestnotes.app.model.BestNotesDeletedTextNoteModel;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.db.ormsqlite.BestNotesDBHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 
@@ -24,6 +25,8 @@ public class BestNotesTextNoteDao {
 	private Dao<BestNotesTextNoteModel, Integer> dao = null;
 	private Context context=null;  
 	BestNotesDBHelper helper=null;
+	BestNotesOperationDao oDao = null;
+	BestNotesDeletedTextNoteDao dDao = null;
 	public BestNotesTextNoteDao(Context context) {
 		super();
 		this.context = context;
@@ -33,7 +36,8 @@ public class BestNotesTextNoteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		oDao = new BestNotesOperationDao(context);
+		dDao = new BestNotesDeletedTextNoteDao(context);
 	}
 	
 	/**
@@ -41,13 +45,16 @@ public class BestNotesTextNoteDao {
 	 * @param id
 	 * @return
 	 */
-	public BestNotesTextNoteModel getTextNoteById(int id){
+	public BestNotesTextNoteModel getTextNoteById(int id, boolean saveOperation){
 		BestNotesTextNoteModel note = null;
 		try {
 			note = dao.queryForId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//记录操作行为到Operation
+		if(saveOperation)
+			oDao.addOperation(id, Constants.Operations.SEARCH_NOTE);
 		return note;
 	}
 	
@@ -74,9 +81,14 @@ public class BestNotesTextNoteDao {
 	 * @param note
 	 * @return 成功返回1;   异常返回-1
 	 */
-	public int addNote(BestNotesTextNoteModel note){
+	public int addNote(BestNotesTextNoteModel note, boolean saveOperation){
+		int ret= -1;
 		try {
-			return dao.create(note);
+			ret = dao.create(note);
+			//记录操作行为到Operation
+			if(saveOperation)
+				oDao.addOperation(note.get_id(), Constants.Operations.ADD_NOTE);
+			return ret;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
@@ -88,7 +100,16 @@ public class BestNotesTextNoteDao {
 	 * @param note
 	 * @return
 	 */
-	public int deleteNotes(List<BestNotesTextNoteModel> toBeDelete){
+	public int deleteNotes(List<BestNotesTextNoteModel> toBeDelete, boolean saveOperation){
+		//记录操作行为到Operation
+		if(saveOperation)
+			for (BestNotesTextNoteModel item : toBeDelete) {
+				oDao.addOperation(item.get_id(), Constants.Operations.DELETE_NOTE);
+				//在回收站表中创建该笔记
+				BestNotesDeletedTextNoteModel deletedNote = new BestNotesDeletedTextNoteModel();
+				deletedNote.setDataFromTextNote(item);
+				dDao.addNote(deletedNote);
+			}
 		try {
 			return dao.delete(toBeDelete);
 		} catch (SQLException e) {

@@ -58,7 +58,7 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 			note.setModificationTime(System.currentTimeMillis());
 			note.setTitle(et_title.getText().toString());
 			BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
-			int ret = dao.addNote(note);
+			int ret = dao.addNote(note, true);
 			if (ret == 1) {
 				ActivityUtil.showCenterShortToast(this, getResources()
 						.getString(R.string.save_success));

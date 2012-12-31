@@ -11,4 +11,14 @@ public class Constants {
 		public static final String CLICKED_POSITION = "bestnotes.CLICKED_POSITION";
 	}
 	
+	public class Operations{
+		public static final int ADD_NOTE = 100;
+		public static final int UPDATE_NOTE = 101;
+		public static final int DELETE_NOTE = 102;
+		public static final int SEARCH_NOTE = 103;
+		public static final int FIRST_START = 104;//首次进入程序
+		public static final int READ_NOTE = 105;//读了某一条笔记
+		//TODO 每条笔记的阅读次数，修改次数，做个排行
+	}
+	
 }
