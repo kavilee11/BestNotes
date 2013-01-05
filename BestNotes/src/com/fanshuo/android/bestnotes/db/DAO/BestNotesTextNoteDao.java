@@ -45,16 +45,13 @@ public class BestNotesTextNoteDao {
 	 * @param id
 	 * @return
 	 */
-	public BestNotesTextNoteModel getTextNoteById(int id, boolean saveOperation){
+	public BestNotesTextNoteModel getTextNoteById(int id){
 		BestNotesTextNoteModel note = null;
 		try {
 			note = dao.queryForId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//记录操作行为到Operation
-		if(saveOperation)
-			oDao.addOperation(id, Constants.Operations.SEARCH_NOTE);
 		return note;
 	}
 	

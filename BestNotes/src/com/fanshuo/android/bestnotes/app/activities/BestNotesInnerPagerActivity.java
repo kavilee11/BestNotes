@@ -12,6 +12,8 @@ import com.fanshuo.android.bestnotes.Constants;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesInnerPagerFragmentAdapter;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
+import com.fanshuo.android.bestnotes.app.utils.Debug;
+import com.fanshuo.android.bestnotes.db.DAO.BestNotesOperationDao;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 
 /**
@@ -26,6 +28,7 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 	BestNotesInnerPagerFragmentAdapter adapter;
 	BestNotesTextNoteDao dao;
 	List<BestNotesTextNoteModel> list;
+	BestNotesOperationDao oDao = null;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -36,6 +39,7 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 		pager.setOnPageChangeListener(this);
 		pager.setOffscreenPageLimit(1);
 		dao = new BestNotesTextNoteDao(this);
+		oDao = new BestNotesOperationDao(this);
 		list = dao.getAllNotes(BestNotesTextNoteModel.MODIFY_TIME, false);
 		adapter = new BestNotesInnerPagerFragmentAdapter(getSupportFragmentManager(), list);
 		pager.setAdapter(adapter);
@@ -66,8 +70,6 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 	
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -79,6 +81,8 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 	@Override
 	public void onPageSelected(int arg0) {
 		getSupportActionBar().setTitle(list.get(arg0).getTitle());
+		//添加查看操作到数据库
+		oDao.addOperation(list.get(arg0).get_id(), Constants.Operations.READ_NOTE);
 	}
 								////
 	////////////////////////////////

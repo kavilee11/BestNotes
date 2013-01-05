@@ -43,11 +43,11 @@ public class SlideRightFragmentAdapter extends ArrayAdapter<BestNotesOperationMo
 			noteTitle = "删除了笔记：" + noteTitle;
 			break;
 		case Constants.Operations.ADD_NOTE:
-			noteTitle = (dao.getTextNoteById(op.getNoteId(), false).getTitle());
+			noteTitle = (dao.getTextNoteById(op.getNoteId()).getTitle());
 			noteTitle = "创建了笔记：" + noteTitle;
 			break;
 		case Constants.Operations.READ_NOTE:
-			noteTitle = (dao.getTextNoteById(op.getNoteId(), false).getTitle());
+			noteTitle = (dao.getTextNoteById(op.getNoteId()).getTitle());
 			noteTitle = "查看了笔记：" + noteTitle;
 			break;
 		}

@@ -39,15 +39,15 @@ public class BestNotesDeletedTextNoteDao {
 	 * @return
 	 */
 	public BestNotesDeletedTextNoteModel getTextNoteByNoteId(int id){
-		BestNotesDeletedTextNoteModel note = null;
+		List<BestNotesDeletedTextNoteModel> list = null;
 		try {
-			Map<String, Integer> map = new HashMap<String, Integer>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put(BestNotesDeletedTextNoteModel.NOTE_ID, id);
-			note = dao.queryForFieldValuesArgs(map);
+			list = dao.queryForFieldValuesArgs(map);
 		} catch (SQLException e) {
-			e.printStackTrace(map);
+			e.printStackTrace();
 		}
-		return note;
+		return list.get(0);
 	}
 	
 	

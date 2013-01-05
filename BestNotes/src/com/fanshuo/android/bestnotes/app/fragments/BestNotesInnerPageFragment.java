@@ -3,6 +3,7 @@ package com.fanshuo.android.bestnotes.app.fragments;
 import com.fanshuo.android.bestnotes.Constants;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
+import com.fanshuo.android.bestnotes.app.utils.Debug;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class BestNotesInnerPageFragment extends BestNotesBaseFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		dao = new BestNotesTextNoteDao(getActivity());
-		BestNotesTextNoteModel note = dao.getTextNoteById(noteID, true);
+		BestNotesTextNoteModel note = dao.getTextNoteById(noteID);
 		String newContent = (note.getContent()).replace("\n", "<br>");// 把\n换成html中的换行符
 		note.setContent(newContent);
 		View view = inflater.inflate(R.layout.bestnotes_fragment_inner_page, null);
