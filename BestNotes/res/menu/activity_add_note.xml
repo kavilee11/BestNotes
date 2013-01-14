@@ -7,4 +7,13 @@
         android:showAsAction="always"
         android:title="@string/menu_save">
     </item>
+    
+    <item
+        android:id="@+id/menu_loc"
+        android:icon="@drawable/ic_menu_location"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/menu_location">
+    </item>
+    
 </menu>

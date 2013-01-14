@@ -9,6 +9,11 @@ public class Constants {
 	public class BundleKey{
 		public static final String NOTE_ID = "bestnotes.NOTE_ID";
 		public static final String CLICKED_POSITION = "bestnotes.CLICKED_POSITION";
+		public static final String ADD_LOCATION_TITLE = "bestnotes.ADD_LOCATION_TITLE";
+		public static final String ADD_LOCATION_RESULT_STRING = "bestnotes.ADD_LOCATION_RESULT_STRING";
+		public static final String ADD_LOCATION_RESULT_LATITUDE = "bestnotes.ADD_LOCATION_RESULT_LATITUDE";
+		public static final String ADD_LOCATION_RESULT_LONGITUDE = "bestnotes.ADD_LOCATION_RESULT_LONGITUDE";
+		public static final String NOTE_TITLE = "bestnotes.NOTE_TITLE";
 	}
 	
 	public class Operations{
@@ -19,6 +24,14 @@ public class Constants {
 		public static final int FIRST_START = 104;//首次进入程序
 		public static final int READ_NOTE = 105;//读了某一条笔记
 		//TODO 每条笔记的阅读次数，修改次数，做个排行
+	}
+	
+	public class RequestCodes{
+		public static final int REQUEST_CODE_ADD_POSITION = 1000;//增加笔记位置，进入AddLocationActivity时用
+	}
+	
+	public class ResultCodes{
+		public static final int RESULT_CODE_ADD_POSITION = 2000;//从AddLocationActivity返回时用
 	}
 	
 }

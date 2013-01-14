@@ -1,7 +1,11 @@
 package com.fanshuo.android.bestnotes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.util.LangUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,23 +22,34 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesAddNoteActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesInnerPagerActivity;
+import com.fanshuo.android.bestnotes.app.activities.BestNotesSingleNoteActivity;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
 import com.fanshuo.android.bestnotes.app.fragments.SlideRightFragment;
 import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
+import com.fanshuo.android.bestnotes.app.utils.Debug;
 import com.fanshuo.android.bestnotes.app.view.SelectionListView;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class MainActivity extends SlidingFragmentActivity implements
 		ActionBar.OnNavigationListener,
-		OnItemClickListener{
+		OnItemClickListener,
+		OnInfoWindowClickListener{
 	private SlideLeftListFragment leftFrag;
-	private ListFragment rightFrag;
+//	private ListFragment rightFrag;
 	private SelectionListView lv;
 	BestNotesTextNoteAdapter adapter;
 	List<BestNotesTextNoteModel> list;
+	GoogleMap mMap;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +71,8 @@ public class MainActivity extends SlidingFragmentActivity implements
 				.beginTransaction();
 		leftFrag = new SlideLeftListFragment();
 		t.replace(R.id.frame_left, leftFrag);
-		rightFrag = new SlideRightFragment();
-		t.replace(R.id.frame_right, rightFrag);
+//		rightFrag = new SlideRightFragment();
+//		t.replace(R.id.frame_right, rightFrag);
 		t.commit();
 
 		getSupportActionBar().setTitle("");
@@ -81,6 +96,8 @@ public class MainActivity extends SlidingFragmentActivity implements
 		lv.setAdapter(adapter);
 
 		lv.setOnItemClickListener(this);
+		
+		initMap();
 	}
 
 	@Override
@@ -132,5 +149,32 @@ public class MainActivity extends SlidingFragmentActivity implements
 		intent.putExtra(Constants.BundleKey.CLICKED_POSITION, position);
 		startActivity(intent);
 	}
+	
+	private Map<String, BestNotesTextNoteModel> notesMarkerIdMap = new HashMap<String, BestNotesTextNoteModel>();
+	private void initMap(){
+		mMap = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		mMap.setMyLocationEnabled(true);
+		if(list != null){
+			for (BestNotesTextNoteModel item : list) {
+				if(item.getLatitude() != 0 && item.getLongtitude() != 0){
+					LatLng position = new LatLng(item.getLatitude(), item.getLongtitude());
+					Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(item.getTitle()));
+					notesMarkerIdMap.put(marker.getId(), item);
+				}
+			}
+		}
+		mMap.setOnInfoWindowClickListener(this);
+	}
 
+	@Override
+	public void onInfoWindowClick(Marker arg0) {
+		Intent intent = new Intent(this, BestNotesSingleNoteActivity.class);
+		Bundle bundle = new Bundle();
+		int id = notesMarkerIdMap.get(arg0.getId()).get_id();
+		String title = notesMarkerIdMap.get(arg0.getId()).getTitle();
+		bundle.putInt(Constants.BundleKey.NOTE_ID, id);
+		bundle.putString(Constants.BundleKey.NOTE_TITLE, title);
+		intent.putExtras(bundle);
+		startActivity(intent);
+	}
 }

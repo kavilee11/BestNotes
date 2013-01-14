@@ -9,6 +9,7 @@
     <string name="menu_add_note">添加笔记</string>
     <string name="menu_save">保存</string>
     <string name="menu_delete">删除</string>
+    <string name="menu_location">位置</string>
     <string name="save_success">保存成功</string>
     <string name="save_faild">保存失败</string>
     <string name="please_input_title">请输入标题</string>

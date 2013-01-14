@@ -1,27 +1,29 @@
 package com.fanshuo.android.bestnotes.app.activities;
 
-import java.sql.SQLException;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.fanshuo.android.bestnotes.Constants;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
-import com.j256.ormlite.dao.Dao;
 
 /**
  * @author fanshuo
  * @date 2012-12-25 上午9:49:49
  * @version V1.0
  */
-public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
+public class BestNotesAddNoteActivity extends BestNotesBaseActivity{
 
 	EditText et_title, et_content;
+	double lat, lng;
+	TextView tv_location;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -32,7 +34,7 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 		setContentView(R.layout.bestnotes_activity_add_note);
 		et_title = (EditText) findViewById(R.id.et_title);
 		et_content = (EditText) findViewById(R.id.et_content);
-
+		tv_location = (TextView) findViewById(R.id.tv_location);
 	}
 
 	@Override
@@ -57,6 +59,8 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 			note.setCreateTime(System.currentTimeMillis());
 			note.setModificationTime(System.currentTimeMillis());
 			note.setTitle(et_title.getText().toString());
+			note.setLongtitude(lng);
+			note.setLatitude(lat);
 			BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 			int ret = dao.addNote(note, true);
 			if (ret == 1) {
@@ -68,8 +72,28 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity {
 						.getString(R.string.save_faild));
 			}
 			break;
+		case R.id.menu_loc:
+			Intent intent = new Intent(this, BestNotesAddLocationActivity.class);
+			intent.putExtra(Constants.BundleKey.ADD_LOCATION_TITLE, et_title.getText().toString());
+			startActivityForResult(intent, Constants.RequestCodes.REQUEST_CODE_ADD_POSITION);
+			break;
 		}
 		return true;
 	}
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		switch (arg0) {
+		case Constants.RequestCodes.REQUEST_CODE_ADD_POSITION:
+			if(arg1 == RESULT_OK){
+				tv_location.setText(arg2.getExtras().getString(Constants.BundleKey.ADD_LOCATION_RESULT_STRING));
+				lat = arg2.getDoubleExtra(Constants.BundleKey.ADD_LOCATION_RESULT_LATITUDE, 0d);
+				lng = arg2.getDoubleExtra(Constants.BundleKey.ADD_LOCATION_RESULT_LONGITUDE, 0d);
+			}
+			break;
+		}
+	}
+	
+	
 
 }
