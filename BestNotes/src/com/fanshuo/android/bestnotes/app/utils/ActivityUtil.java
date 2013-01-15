@@ -33,6 +33,20 @@ public class ActivityUtil {
 	}
 	
 	/**
+	 * 重载。显示一个居中的短时间Toast
+	 * @param context
+	 * @param resId
+	 */
+	public static void showCenterShortToast(Context context, int resId){
+		if(toast != null){
+			toast.cancel();
+		}
+		toast = Toast.makeText(context, context.getResources().getString(resId), Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
+	
+	/**
 	 * 抖动一个view，幅度是5pix
 	 * @param context
 	 * @param view

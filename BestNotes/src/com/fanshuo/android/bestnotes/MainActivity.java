@@ -20,10 +20,12 @@ import android.widget.SpinnerAdapter;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.fanshuo.android.bestnotes.app.activities.BestNotesAboutActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesAddNoteActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesInnerPagerActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesSingleNoteActivity;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
+import com.fanshuo.android.bestnotes.app.asynctasks.BestNotesCheckUpdateAsyncTask;
 import com.fanshuo.android.bestnotes.app.fragments.SlideRightFragment;
 import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
@@ -125,6 +127,12 @@ public class MainActivity extends SlidingFragmentActivity implements
 		case R.id.menu_new:
 			bnStartActivity(BestNotesAddNoteActivity.class, null);
 			break;
+		case R.id.menu_about:
+			bnStartActivity(BestNotesAboutActivity.class, null);
+			break;
+		case R.id.menu_check_update:
+			new BestNotesCheckUpdateAsyncTask(this, getSupportFragmentManager()).execute();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -153,17 +161,19 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private Map<String, BestNotesTextNoteModel> notesMarkerIdMap = new HashMap<String, BestNotesTextNoteModel>();
 	private void initMap(){
 		mMap = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-		mMap.setMyLocationEnabled(true);
-		if(list != null){
-			for (BestNotesTextNoteModel item : list) {
-				if(item.getLatitude() != 0 && item.getLongtitude() != 0){
-					LatLng position = new LatLng(item.getLatitude(), item.getLongtitude());
-					Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(item.getTitle()));
-					notesMarkerIdMap.put(marker.getId(), item);
+		if(mMap != null){
+			mMap.setMyLocationEnabled(true);
+			if(list != null){
+				for (BestNotesTextNoteModel item : list) {
+					if(item.getLatitude() != 0 && item.getLongtitude() != 0){
+						LatLng position = new LatLng(item.getLatitude(), item.getLongtitude());
+						Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(item.getTitle()));
+						notesMarkerIdMap.put(marker.getId(), item);
+					}
 				}
 			}
+			mMap.setOnInfoWindowClickListener(this);
 		}
-		mMap.setOnInfoWindowClickListener(this);
 	}
 
 	@Override

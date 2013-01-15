@@ -14,6 +14,8 @@ public class Constants {
 		public static final String ADD_LOCATION_RESULT_LATITUDE = "bestnotes.ADD_LOCATION_RESULT_LATITUDE";
 		public static final String ADD_LOCATION_RESULT_LONGITUDE = "bestnotes.ADD_LOCATION_RESULT_LONGITUDE";
 		public static final String NOTE_TITLE = "bestnotes.NOTE_TITLE";
+		public static final String CHECK_UPDATE_LINK = "bestnotes.CHECK_UPDATE_LINK";
+		public static final String CHECK_UPDATE_VERSION_INFO = "bestnotes.CHECK_UPDATE_VERSION_INFO";
 	}
 	
 	public class Operations{
@@ -32,6 +34,10 @@ public class Constants {
 	
 	public class ResultCodes{
 		public static final int RESULT_CODE_ADD_POSITION = 2000;//从AddLocationActivity返回时用
+	}
+	
+	public class API_URLS{
+		public static final String API_CHECK_UPDATE = "http://froid.sinaapp.com/bestnotes.php";//检查版本更新
 	}
 	
 }

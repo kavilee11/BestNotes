@@ -11,6 +11,9 @@
     <string name="menu_delete">delete</string>
     <string name="menu_location">location</string>
     <string name="menu_done">done</string>
+    <string name="menu_about">About</string>
+    <string name="menu_check_update">Check Update</string>
+    <string name="menu_other">Other</string>
     <string name="save_success">save success</string>
     <string name="save_faild">save faild</string>
     <string name="please_input_title">please input title</string>
@@ -27,5 +30,22 @@
     <string name="set_position">Set Position</string>
 <!--     BestNotesAddLocationActivity页面提示文字 -->
     <string name="add_position_point">Click on the map to add a pin</string>
+    
+    <string name="check_update">Checking for updates</string>
+    
+    <string name="please_wait">Please wait</string>
+    
+    <string name="update_info_title">Detected a new version</string>
+    
+    <string name="update">Update</string>
+    
+    <string name="cancel">Cancel</string>
+    
+    <string name="no_new_version">You are using the latest version</string>
+    <string name="contact_me">Contact us:</string>
+    <string name="thanks">Thanks:</string>
+    <string name="thank_for_donate">Thank you for your donations！</string>
+    <string name="faild_to_donate">Failed to donors, but still thank you！</string>
+    <string name="feed_me">feed me</string>
 
 </resources>

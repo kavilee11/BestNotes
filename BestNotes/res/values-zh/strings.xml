@@ -3,13 +3,17 @@
 
     <string name="app_name">小白笔记</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_search">查找</string>
+    <string name="menu_search">搜索</string>
     <string name="menu_share">分享</string>
     <string name="menu_more">更多</string>
-    <string name="menu_add_note">添加笔记</string>
+    <string name="menu_add_note">添加新笔记</string>
     <string name="menu_save">保存</string>
     <string name="menu_delete">删除</string>
-    <string name="menu_location">位置</string>
+    <string name="menu_location">定位</string>
+    <string name="menu_done">完成</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_check_update">检测更新</string>
+    <string name="menu_other">其他</string>
     <string name="save_success">保存成功</string>
     <string name="save_faild">保存失败</string>
     <string name="please_input_title">请输入标题</string>
@@ -17,8 +21,32 @@
     <string name="title">标题</string>
     <string name="content">内容</string>
     <string name="delete_success">删除成功</string>
-    <string name="selected_num">已选择%1$s条</string>
+    <string name="selected_num">已选择 %1$s 条</string>
     <string name="untitled_notes">无标题笔记</string>
     <string name="content_is_empty">内容为空</string>
+    
+    <string name="getting_location">正在定位</string>
+    
+    <string name="set_position">设置位置</string>
+<!--     BestNotesAddLocationActivity页面提示文字 -->
+    <string name="add_position_point">点击地图 添加大头针</string>
+    
+    <string name="check_update">检测更新</string>
+    
+    <string name="please_wait">请稍候</string>
+    
+    <string name="update_info_title">检测到新版本</string>
+    
+    <string name="update">更新</string>
+    
+    <string name="cancel">取消</string>
+    
+    <string name="no_new_version">您使用的是最新版本</string>
+    
+    <string name="contact_me">联系我们：</string>
+    <string name="thanks">鸣谢：</string>
+    <string name="thank_for_donate">感谢您的捐助！</string>
+    <string name="faild_to_donate">未能捐助，但依然感谢您！</string>
+    <string name="feed_me">喂我</string>
 
 </resources>
