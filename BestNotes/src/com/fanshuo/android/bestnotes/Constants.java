@@ -16,6 +16,8 @@ public class Constants {
 		public static final String NOTE_TITLE = "bestnotes.NOTE_TITLE";
 		public static final String CHECK_UPDATE_LINK = "bestnotes.CHECK_UPDATE_LINK";
 		public static final String CHECK_UPDATE_VERSION_INFO = "bestnotes.CHECK_UPDATE_VERSION_INFO";
+		public static final String NOTE_CONTENT = "bestnotes.NOTE_CONTENT";
+		public static final String NOTE_LOCATION = "bestnotes.NOTE_LOCATION";
 	}
 	
 	public class Operations{

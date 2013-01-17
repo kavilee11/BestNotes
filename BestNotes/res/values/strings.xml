@@ -47,5 +47,6 @@
     <string name="thank_for_donate">Thank you for your donations！</string>
     <string name="faild_to_donate">Failed to donors, but still thank you！</string>
     <string name="feed_me">feed me</string>
+    <string name="menu_edit">Edit</string>
 
 </resources>

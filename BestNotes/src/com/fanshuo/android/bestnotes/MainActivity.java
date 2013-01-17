@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.util.LangUtils;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,15 +23,12 @@ import com.fanshuo.android.bestnotes.app.activities.BestNotesInnerPagerActivity;
 import com.fanshuo.android.bestnotes.app.activities.BestNotesSingleNoteActivity;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
 import com.fanshuo.android.bestnotes.app.asynctasks.BestNotesCheckUpdateAsyncTask;
-import com.fanshuo.android.bestnotes.app.fragments.SlideRightFragment;
 import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
-import com.fanshuo.android.bestnotes.app.utils.Debug;
 import com.fanshuo.android.bestnotes.app.view.SelectionListView;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;

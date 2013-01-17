@@ -48,5 +48,6 @@
     <string name="thank_for_donate">感谢您的捐助！</string>
     <string name="faild_to_donate">未能捐助，但依然感谢您！</string>
     <string name="feed_me">喂我</string>
+    <string name="menu_edit">编辑</string>
 
 </resources>

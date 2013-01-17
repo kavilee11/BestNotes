@@ -115,6 +115,22 @@ public class BestNotesTextNoteDao {
 		}
 	}
 	
+	/**
+	 * 修改笔记
+	 * @param note 修改后的笔记
+	 * @return
+	 */
+	public int updateNote(BestNotesTextNoteModel note, boolean saveOperation){
+		if(saveOperation)
+			oDao.addOperation(note.get_id(), Constants.Operations.UPDATE_NOTE);
+		try {
+			return dao.update(note);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
 	
 	
 	@Override

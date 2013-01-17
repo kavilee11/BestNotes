@@ -65,6 +65,10 @@
             android:name=".app.activities.BestNotesAboutActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".app.activities.BestNotesEditNoteActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

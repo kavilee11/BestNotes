@@ -6,6 +6,7 @@ import com.fanshuo.android.bestnotes.Constants;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.fragments.BestNotesInnerPageFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -15,13 +16,16 @@ import android.os.Bundle;
  */
 public class BestNotesSingleNoteActivity extends BestNotesBaseActivity {
 
+	int noteID = 0;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_single_note);
+		noteID = getIntent().getExtras().getInt(
+				Constants.BundleKey.NOTE_ID);
 		BestNotesInnerPageFragment fragment = BestNotesInnerPageFragment
-				.getInstance(getIntent().getExtras().getInt(
-						Constants.BundleKey.NOTE_ID));
+				.getInstance(noteID);
 		getSupportFragmentManager().beginTransaction()
 				.add(R.id.fragment, fragment).commit();
 		getSupportActionBar().setTitle(
@@ -33,8 +37,8 @@ public class BestNotesSingleNoteActivity extends BestNotesBaseActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		return super.onCreateOptionsMenu(menu);
+		getSupportMenuInflater().inflate(R.menu.activity_view_note, menu);
+		return true;
 	}
 
 	@Override
@@ -42,6 +46,13 @@ public class BestNotesSingleNoteActivity extends BestNotesBaseActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			this.finish();
+			break;
+		case R.id.menu_edit:
+			Bundle bundle = new Bundle();
+			bundle.putInt(Constants.BundleKey.NOTE_ID, noteID);
+			Intent intent = new Intent(this, BestNotesEditNoteActivity.class);
+			intent.putExtras(bundle);
+			startActivity(intent);
 			break;
 		}
 		return true;
