@@ -2,6 +2,7 @@ package com.fanshuo.android.bestnotes.app.activities;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -12,9 +13,12 @@ import android.view.animation.Interpolator;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.Constants;
+import com.fanshuo.android.bestnotes.MainActivity;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
+import com.fanshuo.android.bestnotes.app.model.LocationData;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
+import com.fanshuo.android.bestnotes.app.utils.LBSTool;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -70,6 +74,25 @@ public class BestNotesAddLocationActivity extends BestNotesBaseActivity
 		mMap.setMyLocationEnabled(true);
 		mMap.setOnMarkerDragListener(this);
 		mMap.setOnMapClickListener(this);
+		
+		new AsyncTask<Void, Void, Void>() {
+			LBSTool lbs;
+			LocationData location;
+			@Override
+			protected Void doInBackground(Void... params) {
+				lbs = new LBSTool(BestNotesAddLocationActivity.this);
+				location = lbs.getLocation(120000);
+				return null;
+			}
+			@Override
+			protected void onPostExecute(Void result) {
+				super.onPostExecute(result);
+				LatLng cur = new LatLng(Double.parseDouble(location.getLat()), Double.parseDouble(location.getLon()));
+				mMap.animateCamera(CameraUpdateFactory.newLatLng(cur));
+			}
+		}.execute();
+		
+		
 	}
 
 	@Override

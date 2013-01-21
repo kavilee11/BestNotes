@@ -17,6 +17,8 @@ public class BestNotesTextNoteModel {
 	public static final String MODIFY_TIME = "modificationTime";
 	public static final String LONGITUDE = "longitude";
 	public static final String LATITUDE = "latitude";
+	public static final String DISTANCE = "distance";
+	public static final String DISTANCE_NUM = "distanceNum";
 
 	@DatabaseField(generatedId = true, useGetSet = true, columnName = ID)
 	int _id;
@@ -36,6 +38,10 @@ public class BestNotesTextNoteModel {
 	double longtitude;// 经度
 	@DatabaseField(useGetSet = true, columnName = LATITUDE)
 	double latitude;// 纬度
+	@DatabaseField(useGetSet = true, columnName = DISTANCE)
+	String distance;// 和当前位置的距离的字符串
+	@DatabaseField(useGetSet = true, columnName = DISTANCE_NUM)
+	long distanceNum;
 
 	int year;
 	int month;
@@ -133,6 +139,22 @@ public class BestNotesTextNoteModel {
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+	
+	public long getDistanceNum() {
+		return distanceNum;
+	}
+
+	public void setDistanceNum(long distanceNum) {
+		this.distanceNum = distanceNum;
 	}
 
 	@Override

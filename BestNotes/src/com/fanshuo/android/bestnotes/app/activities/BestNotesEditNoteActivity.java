@@ -82,9 +82,9 @@ public class BestNotesEditNoteActivity extends BestNotesBaseActivity {
 			}
 			break;
 		case R.id.menu_loc:
-			Intent intent = new Intent(this, BestNotesAddLocationActivity.class);
-			intent.putExtra(Constants.BundleKey.ADD_LOCATION_TITLE, et_title.getText().toString());
-			startActivityForResult(intent, Constants.RequestCodes.REQUEST_CODE_ADD_POSITION);
+			Bundle bundle = new Bundle();
+			bundle.putString(Constants.BundleKey.ADD_LOCATION_TITLE, et_title.getText().toString());
+			startActivityForResult(BestNotesAddLocationActivity.class, bundle, Constants.RequestCodes.REQUEST_CODE_ADD_POSITION);
 			break;
 		}
 		return true;

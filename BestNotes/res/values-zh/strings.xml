@@ -49,5 +49,11 @@
     <string name="faild_to_donate">未能捐助，但依然感谢您！</string>
     <string name="feed_me">喂我</string>
     <string name="menu_edit">编辑</string>
+    <string name="confirm_delete">确认删除？</string>
+    <string name="version">版本:%1$s</string>
+    <string name="donate">捐赠</string>
+    <string name="no_data">暂无数据</string>
+    <string name="unknown">未知</string>
+    <string name="meters">米</string>
 
 </resources>

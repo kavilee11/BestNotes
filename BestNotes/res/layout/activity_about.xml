@@ -1,59 +1,103 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:gravity="center_horizontal"
-    >
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:src="@drawable/ic_launcher"
-        android:layout_marginTop="40dp"
-        />
-    <TextView 
-        android:id="@+id/tv_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="10dp"
-        />
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="by Froid"
-        android:layout_marginTop="5dp"
-        />
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/thanks"
-        android:layout_marginTop="30dp"
-        />
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Lesly"
-        android:layout_marginTop="5dp"
-        />
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/contact_me"
-        android:layout_marginTop="30dp"
-        />
-	<TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="froidapp@gmail.com"
-        android:layout_marginTop="5dp"
-        android:autoLink="email"
-        />
-	<Button 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/feed_me"
-        android:textSize="12sp"
-        android:onClick="feedMe"
-        android:layout_marginTop="25dp"
-        />
-</LinearLayout>
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="by Froid" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/thanks" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Lesly" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/contact_me" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:autoLink="email"
+            android:text="froidapp@gmail.com" />
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/bestnotes_devider_white" />
+
+        <LinearLayout
+            android:id="@+id/layout_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/abs__list_selector_holo_dark"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/version" />
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" 
+                android:background="@drawable/bestnotes_devider_white"
+                />
+
+        <Button
+            android:id="@+id/bt_donate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="feedMe"
+            android:layout_marginTop="5dp"
+            android:text="@string/donate"
+            android:textSize="12sp" />
+        <ImageView 
+            android:id="@+id/iv_feedme"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/feedme"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+</ScrollView>

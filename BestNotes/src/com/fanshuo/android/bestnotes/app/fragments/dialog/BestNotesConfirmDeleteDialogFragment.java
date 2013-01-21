@@ -16,17 +16,26 @@ import com.fanshuo.android.bestnotes.R;
  * @date 2013-1-14 下午6:12:34
  * @version V1.0
  */
-public class BestNotesUpdateInfoDialogFragment extends DialogFragment {
+public class BestNotesConfirmDeleteDialogFragment extends DialogFragment {
 
-	String link;
-	String versionInfo;
+	private ConfirmDeleteDialogCallBack callBack;
+
+	public interface ConfirmDeleteDialogCallBack {
+		public void onPositiveButtonClick();
+	}
+
+	public BestNotesConfirmDeleteDialogFragment() {
+
+	}
+
+	public BestNotesConfirmDeleteDialogFragment(ConfirmDeleteDialogCallBack callBack) {
+		super();
+		this.callBack = callBack;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		link = getArguments().getString(Constants.BundleKey.CHECK_UPDATE_LINK);
-		versionInfo = getArguments().getString(
-				Constants.BundleKey.CHECK_UPDATE_VERSION_INFO);
 	}
 
 	@Override
@@ -34,25 +43,19 @@ public class BestNotesUpdateInfoDialogFragment extends DialogFragment {
 
 		// Use the Builder class for convenient dialog construction
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(versionInfo)
-				.setTitle(R.string.update_info_title)
-				.setPositiveButton(R.string.update,
+		builder.setMessage(getResources().getString(R.string.confirm_delete))
+				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								Intent intent = new Intent();
-								intent.setAction("android.intent.action.VIEW");
-								Uri content_url = Uri.parse(link);
-								intent.setData(content_url);
-								intent.setClassName("com.android.browser",
-										"com.android.browser.BrowserActivity");
-								startActivity(intent);
-								getActivity().overridePendingTransition(R.anim.start_activity_enter, R.anim.start_activity_exit);
+								callBack.onPositiveButtonClick();
+								BestNotesConfirmDeleteDialogFragment.this
+										.dismiss();
 							}
 						})
-				.setNegativeButton(R.string.cancel,
+				.setNegativeButton(android.R.string.no,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								BestNotesUpdateInfoDialogFragment.this
+								BestNotesConfirmDeleteDialogFragment.this
 										.dismiss();
 							}
 						});

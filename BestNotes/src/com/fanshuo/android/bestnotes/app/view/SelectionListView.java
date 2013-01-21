@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
 import android.view.MotionEvent;
@@ -18,8 +20,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.fanshuo.android.bestnotes.Constants;
+import com.fanshuo.android.bestnotes.MainActivity;
 import com.fanshuo.android.bestnotes.R;
 import com.fanshuo.android.bestnotes.app.adapters.BestNotesTextNoteAdapter;
+import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
+import com.fanshuo.android.bestnotes.app.fragments.dialog.BestNotesConfirmDeleteDialogFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
@@ -143,20 +149,30 @@ public class SelectionListView extends ListView{
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.menu_delete:
-				BestNotesTextNoteDao dao = new BestNotesTextNoteDao(mActivity);
-				List<BestNotesTextNoteModel> toBeDelete = new ArrayList<BestNotesTextNoteModel>();
+				//这里需要在callBack之前获取已选择的条目，貌似dialog出现再消失，选择的条目就不在了，选择条目数目会变成0
+				final BestNotesTextNoteDao dao = new BestNotesTextNoteDao(mActivity);
+				final List<BestNotesTextNoteModel> toBeDelete = new ArrayList<BestNotesTextNoteModel>();
 				int total = getCount();
 				for (int i = 0; i < total; i++) {
 					if(isItemChecked(i)){
 						toBeDelete.add((BestNotesTextNoteModel)getItemAtPosition(i));
 					}
 				}
-				dao.deleteNotes(toBeDelete, true);
-				for (BestNotesTextNoteModel bestNotesTextNoteModel : toBeDelete) {
-					((BestNotesTextNoteAdapter)getAdapter()).remove(bestNotesTextNoteModel);
-				}
-				((BestNotesTextNoteAdapter)getAdapter()).notifyDataSetChanged();
-				ActivityUtil.showCenterShortToast(mActivity, mActivity.getResources().getString(R.string.delete_success));
+				BestNotesConfirmDeleteDialogFragment.ConfirmDeleteDialogCallBack callBack = new BestNotesConfirmDeleteDialogFragment.ConfirmDeleteDialogCallBack() {
+					@Override
+					public void onPositiveButtonClick() {
+						dao.deleteNotes(toBeDelete, true);
+						for (BestNotesTextNoteModel bestNotesTextNoteModel : toBeDelete) {
+							((BestNotesTextNoteAdapter)getAdapter()).remove(bestNotesTextNoteModel);
+						}
+						((BestNotesTextNoteAdapter)getAdapter()).notifyDataSetChanged();
+						MainActivity.handler.sendEmptyMessage(Constants.MSG_WHAT.WHAT_REFRESH_LISTVIEW);
+						SlideLeftListFragment.handler.sendEmptyMessage(Constants.MSG_WHAT.WHAT_REFRESH_LISTVIEW);
+						ActivityUtil.showCenterShortToast(mActivity, mActivity.getResources().getString(R.string.delete_success));
+					}
+				};
+				BestNotesConfirmDeleteDialogFragment dialog = new BestNotesConfirmDeleteDialogFragment(callBack);
+				dialog.show(mActivity.getSupportFragmentManager(), "");
 				break;
 			}
 			mode.finish();

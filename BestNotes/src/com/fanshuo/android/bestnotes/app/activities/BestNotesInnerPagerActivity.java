@@ -29,6 +29,7 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 	BestNotesTextNoteDao dao;
 	List<BestNotesTextNoteModel> list;
 	BestNotesOperationDao oDao = null;
+	int curNoteId;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -51,8 +52,8 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		return super.onCreateOptionsMenu(menu);
+		getSupportMenuInflater().inflate(R.menu.activity_view_note, menu);
+		return true;
 	}
 
 	@Override
@@ -61,9 +62,15 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 		case android.R.id.home:
 			this.finish();
 			break;
+		case R.id.menu_edit:
+			Bundle bundle = new Bundle();
+			bundle.putInt(Constants.BundleKey.NOTE_ID, curNoteId);
+			startActivity(BestNotesEditNoteActivity.class, bundle);
+			break;
 		}
 		return true;
 	}
+	
 
 	////////////////////////////////
 	////	ViewPager Listener
@@ -81,6 +88,7 @@ public class BestNotesInnerPagerActivity extends BestNotesBaseActivity
 	@Override
 	public void onPageSelected(int arg0) {
 		getSupportActionBar().setTitle(list.get(arg0).getTitle());
+		curNoteId = list.get(arg0).get_id();
 		//添加查看操作到数据库
 		oDao.addOperation(list.get(arg0).get_id(), Constants.Operations.READ_NOTE);
 	}

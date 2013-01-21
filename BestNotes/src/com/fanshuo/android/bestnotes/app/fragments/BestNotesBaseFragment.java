@@ -1,12 +1,14 @@
 package com.fanshuo.android.bestnotes.app.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.fanshuo.android.bestnotes.R;
 
 /**
  * @author fanshuo
@@ -52,6 +54,22 @@ public class BestNotesBaseFragment extends SherlockFragment{
 		super.onResume();
 	}
 
+	protected void startActivity(Class<?> cls, Bundle bundle) {
+		Intent intent = new Intent(getActivity(), cls);
+		if (bundle != null) {
+			intent.putExtras(bundle);
+		}
+		startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.start_activity_enter, R.anim.start_activity_exit);
+	}
 	
+	protected void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
+		Intent intent = new Intent(getActivity(), cls);
+		if (bundle != null) {
+			intent.putExtras(bundle);
+		}
+		startActivityForResult(intent, requestCode);
+		getActivity().overridePendingTransition(R.anim.start_activity_enter, R.anim.start_activity_exit);
+	}
 	
 }

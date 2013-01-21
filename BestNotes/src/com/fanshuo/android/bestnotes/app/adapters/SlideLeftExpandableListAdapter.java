@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fanshuo.android.bestnotes.R;
+import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -49,7 +50,18 @@ private Context context;
 		num.setText(getChildrenCount(groupPosition)+"");
 		return super.getGroupView(groupPosition, isExpanded, convertView, parent);
 	}
-	
-	
 
+	@Override
+	public View getChildView(int groupPosition, int childPosition,
+			boolean isLastChild, View convertView, ViewGroup parent) {
+		if(convertView == null){
+			convertView = LayoutInflater.from(context).inflate(R.layout.item_slide_left_list_child, null);
+		}
+		TextView tv = (TextView) convertView.findViewById(R.id.row_title);
+		BestNotesTextNoteModel note = (BestNotesTextNoteModel)(((Map<String, BestNotesTextNoteModel>)(getChild(groupPosition, childPosition))).get("child"));
+		tv.setText(note.getTitle());
+		getChild(groupPosition, childPosition);
+		return convertView;
+	}
+	
 }

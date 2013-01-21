@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/bg_blue"
+    >
 
     <ExpandableListView
         android:id="@id/android:list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/bg_blue"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@drawable/bestnotes_devider_white"
@@ -19,8 +21,12 @@
 
     <TextView
         android:id="@id/android:empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="No Data" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="@string/no_data" 
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        />
 
-</LinearLayout>
+</RelativeLayout>

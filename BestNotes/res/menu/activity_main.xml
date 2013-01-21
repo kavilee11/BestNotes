@@ -9,7 +9,7 @@
     </item>
     <item
         android:id="@+id/menu_search"
-        android:actionViewClass="android.widget.SearchView"
+        android:actionViewClass="com.actionbarsherlock.widget.SearchView"
         android:icon="@drawable/ic_menu_search"
         android:orderInCategory="2"
         android:showAsAction="always|collapseActionView"

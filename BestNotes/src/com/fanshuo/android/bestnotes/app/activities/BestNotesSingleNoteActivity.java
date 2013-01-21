@@ -50,9 +50,7 @@ public class BestNotesSingleNoteActivity extends BestNotesBaseActivity {
 		case R.id.menu_edit:
 			Bundle bundle = new Bundle();
 			bundle.putInt(Constants.BundleKey.NOTE_ID, noteID);
-			Intent intent = new Intent(this, BestNotesEditNoteActivity.class);
-			intent.putExtras(bundle);
-			startActivity(intent);
+			startActivity(BestNotesEditNoteActivity.class, bundle);
 			break;
 		}
 		return true;

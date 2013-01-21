@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.Constants;
+import com.fanshuo.android.bestnotes.MainActivity;
 import com.fanshuo.android.bestnotes.R;
+import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
@@ -64,6 +66,8 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity{
 			BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 			int ret = dao.addNote(note, true);
 			if (ret == 1) {
+				MainActivity.handler.sendEmptyMessage(Constants.MSG_WHAT.WHAT_REFRESH_LISTVIEW);
+				SlideLeftListFragment.handler.sendEmptyMessage(Constants.MSG_WHAT.WHAT_REFRESH_LISTVIEW);
 				ActivityUtil.showCenterShortToast(this, getResources()
 						.getString(R.string.save_success));
 				this.finish();
@@ -73,9 +77,9 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity{
 			}
 			break;
 		case R.id.menu_loc:
-			Intent intent = new Intent(this, BestNotesAddLocationActivity.class);
-			intent.putExtra(Constants.BundleKey.ADD_LOCATION_TITLE, et_title.getText().toString());
-			startActivityForResult(intent, Constants.RequestCodes.REQUEST_CODE_ADD_POSITION);
+			Bundle bundle = new Bundle();
+			bundle.putString(Constants.BundleKey.ADD_LOCATION_TITLE, et_title.getText().toString());
+			startActivityForResult(BestNotesAddLocationActivity.class, bundle, Constants.RequestCodes.REQUEST_CODE_ADD_POSITION);
 			break;
 		}
 		return true;

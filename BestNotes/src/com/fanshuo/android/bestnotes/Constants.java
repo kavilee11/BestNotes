@@ -42,4 +42,13 @@ public class Constants {
 		public static final String API_CHECK_UPDATE = "http://froid.sinaapp.com/bestnotes.php";//检查版本更新
 	}
 	
+	public class MSG_WHAT{
+		public static final int WHAT_REFRESH_LISTVIEW = 3000;
+	}
+	
+	public class UMENG_EVENT{
+		public static final String DONATE = "Donate";
+		public static final String VERSION = "Version";
+	}
+	
 }

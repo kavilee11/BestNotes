@@ -48,5 +48,10 @@
     <string name="faild_to_donate">Failed to donors, but still thank you！</string>
     <string name="feed_me">feed me</string>
     <string name="menu_edit">Edit</string>
-
+	<string name="confirm_delete">Confirm delete?</string>
+	<string name="version">version:%1$s</string>
+	<string name="donate">donate</string>
+	<string name="no_data">No Data</string>
+	<string name="unknown">Unknown</string>
+	<string name="meters">Meters</string>
 </resources>
