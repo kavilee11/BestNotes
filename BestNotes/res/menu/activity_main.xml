@@ -7,13 +7,13 @@
         android:showAsAction="always"
         android:title="@string/menu_add_note">
     </item>
-    <item
-        android:id="@+id/menu_search"
-        android:actionViewClass="com.actionbarsherlock.widget.SearchView"
-        android:icon="@drawable/ic_menu_search"
-        android:orderInCategory="2"
-        android:showAsAction="always|collapseActionView"
-        android:title="@string/menu_search"/>
+<!--     <item -->
+<!--         android:id="@+id/menu_search" -->
+<!--         android:actionViewClass="com.actionbarsherlock.widget.SearchView" -->
+<!--         android:icon="@drawable/ic_menu_search" -->
+<!--         android:orderInCategory="2" -->
+<!--         android:showAsAction="always|collapseActionView" -->
+<!--         android:title="@string/menu_search"/> -->
     <item
         android:showAsAction="always"
         android:orderInCategory="3"

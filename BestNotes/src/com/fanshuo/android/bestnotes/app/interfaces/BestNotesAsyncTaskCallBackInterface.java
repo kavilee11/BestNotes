@@ -11,6 +11,6 @@ public interface BestNotesAsyncTaskCallBackInterface {
 	 * 
 	 * 执行完doInBackground后回调
 	 */
-	public void afterDoInBackground();
+	public void afterDoInBackground(Object obj);
 
 }

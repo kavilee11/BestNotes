@@ -61,7 +61,7 @@ public class BestNotesUpdateDistanceAsyncTask extends
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
-		callBack.afterDoInBackground();
+		callBack.afterDoInBackground("");
 	}
 
 }

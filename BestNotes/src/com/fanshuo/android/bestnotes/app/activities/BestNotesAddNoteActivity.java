@@ -11,7 +11,9 @@ import com.actionbarsherlock.view.MenuItem;
 import com.fanshuo.android.bestnotes.Constants;
 import com.fanshuo.android.bestnotes.MainActivity;
 import com.fanshuo.android.bestnotes.R;
+import com.fanshuo.android.bestnotes.app.asynctasks.BestNotesGetLocationAsyncTask;
 import com.fanshuo.android.bestnotes.app.fragments.SlideLeftListFragment;
+import com.fanshuo.android.bestnotes.app.interfaces.BestNotesAsyncTaskCallBackInterface;
 import com.fanshuo.android.bestnotes.app.model.BestNotesTextNoteModel;
 import com.fanshuo.android.bestnotes.app.utils.ActivityUtil;
 import com.fanshuo.android.bestnotes.db.DAO.BestNotesTextNoteDao;
@@ -97,7 +99,4 @@ public class BestNotesAddNoteActivity extends BestNotesBaseActivity{
 			break;
 		}
 	}
-	
-	
-
 }

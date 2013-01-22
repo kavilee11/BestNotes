@@ -297,7 +297,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 	}
 
 	@Override
-	public void afterDoInBackground() {
+	public void afterDoInBackground(Object obj) {
 		setProgressBarIndeterminateVisibility(false);
 		BestNotesTextNoteDao dao = new BestNotesTextNoteDao(this);
 		switch (curType) {
